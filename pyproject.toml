@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "ahk-mini-ide"
+version = "0.1.0"
+description = "AHK v2 Development Environment — Inspector, Editor/Runner, and Global Hotkey Codegen"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+    "PyQt6>=6.5.0",
+]
+
+[project.scripts]
+ahk-mini-ide = "ahk_mini_ide.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["ahk_mini_ide*"]
