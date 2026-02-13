@@ -3,25 +3,17 @@
 from __future__ import annotations
 
 import os
-import sys
 from functools import partial
 
 from PyQt6.QtCore import QByteArray, Qt
-from PyQt6.QtGui import QAction, QColor, QIcon
 from PyQt6.QtWidgets import (
-    QApplication,
-    QComboBox,
     QDockWidget,
     QFileDialog,
-    QFrame,
     QHBoxLayout,
     QLabel,
     QMainWindow,
-    QMenu,
-    QMenuBar,
     QMessageBox,
     QPushButton,
-    QToolBar,
     QVBoxLayout,
     QWidget,
 )
@@ -110,11 +102,12 @@ class MainWindow(QMainWindow):
 
         self._status_indicator = QLabel()
         self._status_indicator.setFixedSize(16, 16)
-        self._set_run_status(RunState.IDLE)
         runner_bar.addWidget(self._status_indicator)
 
         self._status_label = QLabel("Idle")
         runner_bar.addWidget(self._status_label)
+
+        self._set_run_status(RunState.IDLE)
         runner_bar.addStretch()
 
         layout.addLayout(runner_bar)
@@ -283,7 +276,8 @@ class MainWindow(QMainWindow):
     # ================================================================
     #  Hotkey dispatch
     # ================================================================
-    def _on_hotkey(self, hid: HotkeyID) -> None:
+    def _on_hotkey(self, hid_int: int) -> None:
+        hid = HotkeyID(hid_int)
         snap = self._inspector.snapshot
         coord_mode = self._settings.get("default_coord_mode", "Window")
 

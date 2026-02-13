@@ -18,7 +18,7 @@ class RunState(Enum):
 class AHKRunner(QObject):
     """Manages a single AHK v2 child process."""
 
-    state_changed = pyqtSignal(RunState)
+    state_changed = pyqtSignal(object)
     stdout_ready = pyqtSignal(str)
     stderr_ready = pyqtSignal(str)
     finished = pyqtSignal(int, str)  # exit_code, message
