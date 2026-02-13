@@ -5,8 +5,8 @@ from __future__ import annotations
 from pathlib import Path
 
 from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QFileSystemModel
 from PyQt6.QtWidgets import (
-    QFileSystemModel,
     QMenu,
     QTreeView,
     QVBoxLayout,
