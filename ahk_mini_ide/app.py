@@ -108,9 +108,8 @@ class MainWindow(QMainWindow):
         self._btn_stop.clicked.connect(self._on_stop)
         runner_bar.addWidget(self._btn_stop)
 
-        self._status_indicator = QFrame()
+        self._status_indicator = QLabel()
         self._status_indicator.setFixedSize(16, 16)
-        self._status_indicator.setFrameShape(QFrame.Shape.Circle)
         self._set_run_status(RunState.IDLE)
         runner_bar.addWidget(self._status_indicator)
 
