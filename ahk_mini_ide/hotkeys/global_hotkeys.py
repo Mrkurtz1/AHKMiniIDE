@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import sys
 from enum import IntEnum, auto
-from typing import Callable
 
 from PyQt6.QtCore import QAbstractNativeEventFilter, QObject, pyqtSignal
 
@@ -37,7 +36,7 @@ class HotkeyID(IntEnum):
 class HotkeyManager(QObject):
     """Register/unregister global hotkeys and emit signals on activation."""
 
-    hotkey_triggered = pyqtSignal(HotkeyID)
+    hotkey_triggered = pyqtSignal(int)
 
     def __init__(self, parent: QObject | None = None):
         super().__init__(parent)

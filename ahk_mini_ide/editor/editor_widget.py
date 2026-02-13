@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from PyQt6.QtCore import QRect, QSize, Qt
-from PyQt6.QtGui import QAction, QColor, QFont, QPainter, QTextCursor, QTextDocument
+from PyQt6.QtGui import QColor, QFont, QPainter, QTextCursor, QTextDocument
 from PyQt6.QtWidgets import (
     QDialog,
     QHBoxLayout,
@@ -195,23 +195,23 @@ class FindReplaceDialog(QDialog):
         row3.addWidget(self._case_cb)
         layout.addLayout(row3)
 
-    def _flags(self) -> QTextDocument.FindFlag:
-        flags = QTextDocument.FindFlag(0)
+    def _do_find(self, text: str) -> bool:
+        """Call editor.find with the right flags. Returns True if found."""
         if self._case_cb.isChecked():
-            flags |= QTextDocument.FindFlag.FindCaseSensitively
-        return flags
+            return self._editor.find(text, QTextDocument.FindFlag.FindCaseSensitively)
+        return self._editor.find(text)
 
     def _find_next(self) -> bool:
         text = self._find_edit.text()
         if not text:
             return False
-        found = self._editor.find(text, self._flags())
+        found = self._do_find(text)
         if not found:
             # Wrap around
             cursor = self._editor.textCursor()
             cursor.movePosition(QTextCursor.MoveOperation.Start)
             self._editor.setTextCursor(cursor)
-            found = self._editor.find(text, self._flags())
+            found = self._do_find(text)
         return found
 
     def _replace(self) -> None:
@@ -230,7 +230,7 @@ class FindReplaceDialog(QDialog):
         self._editor.setTextCursor(cursor)
         count = 0
         cursor.beginEditBlock()
-        while self._editor.find(text, self._flags()):
+        while self._do_find(text):
             tc = self._editor.textCursor()
             tc.insertText(replacement)
             count += 1

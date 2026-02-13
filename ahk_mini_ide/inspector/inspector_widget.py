@@ -5,7 +5,6 @@ from __future__ import annotations
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal
 from PyQt6.QtGui import QColor, QFont
 from PyQt6.QtWidgets import (
-    QApplication,
     QCheckBox,
     QFormLayout,
     QFrame,
@@ -13,7 +12,6 @@ from PyQt6.QtWidgets import (
     QHBoxLayout,
     QLabel,
     QLineEdit,
-    QSlider,
     QSpinBox,
     QVBoxLayout,
     QWidget,
